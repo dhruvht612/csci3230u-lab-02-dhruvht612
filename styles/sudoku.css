@@ -26,24 +26,154 @@ body {
   color: #222;
 }
 
-/* ---- site header / nav  (requirement 7) ---------------------------- */
-/* TODO: a Flexbox row on .site-header; push the nav right with
-   margin-left:auto; add flex-wrap so the nav drops below the brand on a
-   narrow screen (that's the whole responsive story - no media query). */
+main {
+  padding: 1rem;
+}
 
+h1 {
+  margin: 2rem 0;
+}
+
+/* ---- site header / nav  (requirement 7) ---------------------------- */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;          /* narrow screen: the nav drops below the brand */
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--header-bg);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.brand img {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: auto;        /* pushes the nav to the right */
+}
+
+.site-header nav a {
+  color: #e8e8e8;
+  text-decoration: none;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
 
 /* ---- the board  (requirement 5) ------------------------------------ */
-/* TODO: border-collapse the #board; size each cell and centre the digit;
-   thin cell borders + a THICK border around each 3x3 block
-   (td:nth-child(3n) and tr:nth-child(3n) td); a :hover colour.
-   Also add .user-input and .error rules now - Lab 06 switches them on. */
 
+#board {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: min(100%, 486px);  /* 9 cells x 54px, but shrinks on a phone */
+  aspect-ratio: 1 / 1;      /* keeps the cells square at any width */
+  margin: 0 auto;
+  border: 2px solid var(--block-line);
+}
+
+#board tr {
+  height: 11.1111%;         /* 1/9 of the table, so empty rows stay square */
+}
+
+#board td {
+  border: 1px solid var(--board-line);
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.25rem;
+  color: var(--digit);
+}
+
+/* thick lines around each 3x3 block */
+#board td:nth-child(3n) {
+  border-right: 2px solid var(--block-line);
+}
+
+#board tr:nth-child(3n) td {
+  border-bottom: 2px solid var(--block-line);
+}
+
+#board td:hover {
+  background-color: var(--color-hover);
+}
+
+/* switched on by the JavaScript in Lab 05 */
+#board td.user-input {
+  background-color: var(--color-user-input);
+}
+
+#board td.error {
+  background-color: var(--color-error);
+}
 
 /* ---- the numbers palette  (requirement 6) -------------------------- */
-/* TODO: size + border the .palette cells; a :hover colour; and a
-   .active style for the selected digit (used in Lab 06). */
 
+.palette {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: min(100%, 480px);  /* 10 cells, same idea as the board */
+  aspect-ratio: 10 / 1;
+  margin: 0.75rem auto 0;
+  border: 2px solid var(--block-line);
+}
+
+.palette td {
+  border: 1px solid var(--board-line);
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.125rem;
+  color: var(--digit);
+}
+
+.palette td:hover {
+  background-color: var(--color-hover);
+}
+
+.palette td.active {
+  background-color: var(--color-hover);
+  font-weight: bold;
+}
+
+.palette img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
 
 /* ---- high-scores table  (requirement 8) ---------------------------- */
-/* TODO: comfortable padding; left-aligned headings; an underline under
-   the header row of .scores. */
+
+.scores {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.scores th,
+.scores td {
+  padding: 0.6rem 2rem 0.6rem 0.75rem;
+  text-align: left;
+}
+
+.scores thead th {
+  border-bottom: 2px solid var(--block-line);
+}
+
+.scores tbody td {
+  color: var(--digit);
+}
